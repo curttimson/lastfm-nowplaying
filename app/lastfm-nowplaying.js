@@ -95,42 +95,44 @@ angular.module('lastfm-nowplaying', [])
             }
         };
 
+        var maintainRatio = function(container, canvas, image) {
+
+          if((image.width / image.height) > (container.innerWidth / container.innerHeight)) {
+
+            canvas.height(container.innerHeight);
+            canvas.width(canvas.height() * (image.width / image.height))
+            canvas.css('marginLeft', container.innerWidth - canvas.width());
+
+          } else {
+            canvas.width(container.innerWidth);
+            canvas.height(canvas.width() * (image.height / image.width));
+            canvas.css('marginLeft', 0);
+          }
+
+        };
+
         var blurGenerator = function (element, canvas, blurAmount, src, callback) {
 
-                var image, canvasImage;
-                var maintainRatio = function() {
+            var image, canvasImage;
 
-                  if((image.width / image.height) > ($window.innerWidth / $window.innerHeight)) {
+            image = document.createElement("img");
+            image.onload = function () {
 
-                    element.height($window.innerHeight);
-                    element.width(element.height() * (image.width / image.height))
-                    element.css('marginLeft', $window.innerWidth - element.width());
+                canvasImage = new CanvasImage(canvas, this);
+                canvasImage.blur(blurAmount);
+                //maintainRatio($window, canvas, image);
 
-                  } else {
-                    element.width($window.innerWidth);
-                    element.height(element.width() * (image.height / image.width));
-                    element.css('marginLeft', 0);
-                  }
+                element.addClass('loaded');
 
-                };
-                image = document.createElement("img");
-                image.onload = function () {
+              if(callback) {
+                  callback();
+              }
+            };
+            image.src = src;
 
-                    canvasImage = new CanvasImage(canvas, this);
-                    canvasImage.blur(blurAmount);
-                    //maintainRatio();
-
-                    element.addClass('loaded');
-
-                  if(callback) {
-                      callback();
-                  }
-                };
-                image.src = src;
-
-                angular.element($window).bind('resize', function(){
-                  maintainRatio();
-                });
+            angular.element($window).bind('resize', function(){
+              maintainRatio($window, canvas, image);
+            });
 
         };
 
