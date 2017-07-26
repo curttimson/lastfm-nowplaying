@@ -95,18 +95,18 @@ angular.module('lastfm-nowplaying', [])
             }
         };
 
-        var maintainRatio = function(container, canvas, image) {
+        var maintainRatio = function($container, $canvas, image) {
 
-          if((image.width / image.height) > (container.innerWidth / container.innerHeight)) {
+          if((image.width / image.height) > ($container.width() / $container.height)) {
 
-            canvas.height(container.innerHeight);
-            canvas.width(canvas.height() * (image.width / image.height))
-            canvas.css('marginLeft', container.innerWidth - canvas.width());
+            $canvas.height($container.height());
+            $canvas.width($canvas.height() * (image.width / image.height))
+            $canvas.css('marginLeft', $container.width() - $canvas.width());
 
           } else {
-            canvas.width(container.innerWidth);
-            canvas.height(canvas.width() * (image.height / image.width));
-            canvas.css('marginLeft', 0);
+            $canvas.width($container.width());
+            $canvas.height($canvas.width() * (image.height / image.width));
+            $canvas.css('marginLeft', 0);
           }
 
         };
@@ -120,7 +120,7 @@ angular.module('lastfm-nowplaying', [])
 
                 canvasImage = new CanvasImage(canvas, this);
                 canvasImage.blur(blurAmount);
-                //maintainRatio($window, canvas, image);
+                maintainRatio($(element), $(canvas), image);
 
                 element.addClass('loaded');
 
@@ -131,7 +131,7 @@ angular.module('lastfm-nowplaying', [])
             image.src = src;
 
             angular.element($window).bind('resize', function(){
-              maintainRatio($window, canvas, image);
+              maintainRatio($(element), $(canvas), image);
             });
 
         };
