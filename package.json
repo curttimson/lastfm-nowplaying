@@ -1,0 +1,22 @@
+{
+  "name": "lastfm-nowplaying",
+  "version": "0.0.1",
+  "description": "Last.fm \"Now Playing\" AngularJs Module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curttimson/lastfm-nowplaying.git"
+  },
+  "keywords": [
+    "lastfm"
+  ],
+  "author": "Curtis Timson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/curttimson/lastfm-nowplaying/issues"
+  },
+  "homepage": "https://github.com/curttimson/lastfm-nowplaying#readme"
+}
