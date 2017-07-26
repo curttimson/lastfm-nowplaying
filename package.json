@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/curttimson/lastfm-nowplaying#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
   }
 }
