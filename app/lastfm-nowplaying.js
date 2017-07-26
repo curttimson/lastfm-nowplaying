@@ -1,10 +1,11 @@
 angular.module('lastfm-nowplaying', [])
-  .directive('lastfmnowplaying', ['lastFmAPI', function(lastFmAPI){
+  .directive('lastfmnowplaying', ['lastFmAPI', 'canvasUI', function(lastFmAPI, canvasUI){
 
     var createCanvas = function(e, scope, data){
       var canvas = document.createElement('canvas');
       var context = canvas.getContext('2d');
       e.appendChild(canvas);
+      canvasUI.applyUI(e, canvas, data);
     };
 
     var link = function(scope, element, attrs){
@@ -50,4 +51,19 @@ angular.module('lastfm-nowplaying', [])
       getLatestScrobbles: getLatestScrobbles
     };
 
-  }]);
+  }])
+  .factory('canvasUI', [function(){
+
+    var applyUI = function(e, canvas, lastFmData){
+
+      var imgUrl = lastFmData.data.recenttracks.track[0].image[1]['#text'];
+
+      console.log(imgUrl);
+
+    };
+
+    return {
+      applyUI: applyUI
+    };
+
+  }]);;
