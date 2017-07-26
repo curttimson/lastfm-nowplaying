@@ -58,7 +58,7 @@ angular.module('lastfm-nowplaying', [])
 
       var imgUrl = lastFmData.data.recenttracks.track[0].image[3]['#text'];
 
-      imageFx.blur(angular.element(e), canvas, 7, imgUrl, function(){
+      imageFx.blur($(e), canvas, 6, imgUrl, function(){
         console.log('blur done');
       });
 
