@@ -2,6 +2,9 @@
 
   padding:20px 0;
   overflow: hidden;
+  position: relative;
+  height: 200px;
+  box-sizing: border-box;
 
   canvas{
     position: absolute;
