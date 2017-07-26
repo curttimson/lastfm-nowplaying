@@ -1,9 +1,9 @@
 angular.module('lastfm-nowplaying', [])
-  .directive('lastfmnowplaying', [function(){
+  .directive('lastfmnowplaying', ['lastFmAPI', function(lastFmAPI){
 
     var link = function(scope, element, attrs){
 
-      LastFMAPI.getLatestScrobbles(scope.config).then(function(data){
+      lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
 
         console.log('lastfmAPI callback');
 
@@ -16,9 +16,9 @@ angular.module('lastfm-nowplaying', [])
         config: '=config'
       },
       link: link
-    },
+    };
   }])
-  .factory('LastFMAPI', ['$q', '$http', function($q, $http){
+  .factory('lastFmAPI', ['$q', '$http', function($q, $http){
 
     var getLatestScrobbles = function(config){
 
