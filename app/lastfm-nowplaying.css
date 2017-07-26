@@ -1,0 +1,7 @@
+.lastfm-nowplaying {
+  padding: 20px 0;
+  overflow: hidden; }
+  .lastfm-nowplaying canvas {
+    position: absolute;
+    left: 0;
+    top: 0; }
