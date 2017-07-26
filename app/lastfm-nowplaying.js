@@ -98,17 +98,27 @@ angular.module('lastfm-nowplaying', [])
 
         var maintainRatio = function($container, $canvas, image) {
 
+          var marginLeft = 0;
+          var marginTop = 0;
+
           if((image.width / image.height) > ($container.width() / $container.height)) {
 
             $canvas.height($container.height());
             $canvas.width($canvas.height() * (image.width / image.height))
-            $canvas.css('marginLeft', $container.width() - $canvas.width());
+            marginLeft = $container.width() - $canvas.width();
 
           } else {
             $canvas.width($container.width());
             $canvas.height($canvas.width() * (image.height / image.width));
-            $canvas.css('marginLeft', 0);
           }
+
+            marginTop = (($canvas.height()-$container.height())/2)*-1;
+
+
+          $canvas.css({
+            'marginLeft': marginLeft,
+            'marginTop': marginTop
+          });
 
         };
 
