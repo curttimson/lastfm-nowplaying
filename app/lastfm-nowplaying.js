@@ -1,11 +1,21 @@
 angular.module('lastfm-nowplaying', [])
   .directive('lastfmnowplaying', ['lastFmAPI', function(lastFmAPI){
 
+    var createCanvas = function(e, scope, data){
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+      e.appendChild(canvas);
+    };
+
     var link = function(scope, element, attrs){
 
       lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
 
-        console.log('lastfmAPI callback');
+        angular.forEach(element, function(e,i){
+
+          createCanvas(e, scope, data);
+
+        });
 
       });
 
