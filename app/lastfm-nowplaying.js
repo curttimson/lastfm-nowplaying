@@ -14,6 +14,7 @@ angular.module('lastfm-nowplaying', [])
 
         angular.forEach(element, function(e,i){
 
+          angular.element(element).addClass('lastfm-nowplaying');
           createCanvas(e, scope, data);
 
         });
