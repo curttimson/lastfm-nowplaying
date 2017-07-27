@@ -1,6 +1,6 @@
 .lastfm-nowplaying{
 
-  padding:20px 0;
+  padding:20px;
   overflow: hidden;
   position: relative;
   height: 200px;
@@ -20,10 +20,18 @@
     display: inline-block;
   }
 
+  img{
+    height:100%;
+  }
+
   .text{
     color:#fff;
     &.black{
       color:#000;
+    }
+
+    h3{
+      margin:0;
     }
   }
 }
