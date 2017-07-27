@@ -5,6 +5,8 @@
   position: relative;
   height: 185px;
   box-sizing: border-box;
+  font-family: Arial;
+  font-size: 1em;
 
   canvas{
     position: absolute;
@@ -37,6 +39,20 @@
 
     h3{
       margin:0;
+      margin-bottom:32px;
+      font-weight: normal;
+    }
+
+    p{
+      margin:16px 0;
+    }
+
+    .track{
+      font-weight: bold;
+      font-size:1.2em;
+    }
+    .artist{
+      // font-size:0.6em;
     }
   }
 }

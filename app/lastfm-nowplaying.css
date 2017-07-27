@@ -3,7 +3,9 @@
   overflow: hidden;
   position: relative;
   height: 185px;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: Arial;
+  font-size: 1em; }
   .lastfm-nowplaying canvas {
     position: absolute;
     left: 0;
@@ -26,4 +28,11 @@
     .lastfm-nowplaying .text.black {
       color: #000; }
     .lastfm-nowplaying .text h3 {
-      margin: 0; }
+      margin: 0;
+      margin-bottom: 32px;
+      font-weight: normal; }
+    .lastfm-nowplaying .text p {
+      margin: 16px 0; }
+    .lastfm-nowplaying .text .track {
+      font-weight: bold;
+      font-size: 1.2em; }
