@@ -35,10 +35,50 @@ angular.module('lastfm-nowplaying', [])
 
     var createCanvas = function(e, scope, imgUrl){
       var canvas = document.createElement('canvas');
-      var context = canvas.getContext('2d');
       e.appendChild(canvas);
-      canvasUI.applyUI(e, canvas, imgUrl);
+      canvasUI.applyUI(e, canvas, imgUrl, function(){
+
+        setTimeout(function(){
+
+          var canvasColor = getCanvasColor(canvas);
+
+          console.log('canvasColor', canvasColor);
+
+          var useWhiteText = true;
+          if ((canvasColor.r*0.299 + canvasColor.g*0.587 + canvasColor.b*0.114) > 186){
+            useWhiteText = false;
+          }
+          console.log('useWhiteText', useWhiteText);
+
+        },1000);
+
+      });
+
+
     };
+
+    var getCanvasColor = function(canvas){
+      var width = canvas.width;
+      var height = canvas.height;
+      var ctx = canvas.getContext('2d');
+      var imageData = ctx.getImageData(0, 0, width, height);
+      var data = imageData.data;
+      var r = 0;
+      var g = 0;
+      var b = 0;
+
+      for (var i = 0, l = data.length; i < l; i += 4) {
+        r += data[i];
+        g += data[i+1];
+        b += data[i+2];
+      }
+
+      r = Math.floor(r / (data.length / 4));
+      g = Math.floor(g / (data.length / 4));
+      b = Math.floor(b / (data.length / 4));
+
+      return { r: r, g: g, b: b };
+    }
 
     var createImage = function(e, imgUrl){
       var image = document.createElement('img');
@@ -116,8 +156,10 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
-    var applyUI = function(e, canvas, imgUrl){
-      imageFx.blur($(e), canvas, 6, imgUrl);
+    var applyUI = function(e, canvas, imgUrl, callback){
+      imageFx.blur($(e), canvas, 6, imgUrl, function(){
+        callback();
+      });
     };
 
     return {
@@ -182,6 +224,7 @@ angular.module('lastfm-nowplaying', [])
             var image, canvasImage;
 
             image = document.createElement("img");
+            image.crossOrigin = "Anonymous";
             image.onload = function () {
 
                 canvasImage = new CanvasImage(canvas, this);
@@ -191,7 +234,7 @@ angular.module('lastfm-nowplaying', [])
                 element.addClass('loaded');
 
               if(callback) {
-                  callback();
+                callback();
               }
             };
             image.src = src;
@@ -203,12 +246,11 @@ angular.module('lastfm-nowplaying', [])
         };
 
         return {
-            blur: function (element, blurAmount, src, callback) {
-
+            blur: function (element, canvas, blurAmount, src, callback) {
                 var canvasSupported = !!$window.HTMLCanvasElement;
                 if(canvasSupported) {
 
-                    return blurGenerator(element, blurAmount, src, callback);
+                    return blurGenerator(element, canvas, blurAmount, src, callback);
                 } else {
                     return false;
                 }
