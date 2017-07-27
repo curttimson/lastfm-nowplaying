@@ -9,6 +9,8 @@
     left: 0;
     top: 0;
     z-index: 0; }
-  .lastfm-nowplaying img {
+  .lastfm-nowplaying img,
+  .lastfm-nowplaying .text {
     z-index: 1;
-    position: relative; }
+    position: relative;
+    display: inline-block; }

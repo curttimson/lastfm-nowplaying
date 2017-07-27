@@ -30,6 +30,7 @@ angular.module('lastfm-nowplaying', [])
     var create = function(e, scope, latestTrack){
       createCanvas(e, scope, latestTrack.xLargeImgUrl);
       createImage(e, latestTrack.largeImgUrl);
+      createText(e, latestTrack);
     }
 
     var createCanvas = function(e, scope, imgUrl){
@@ -44,6 +45,28 @@ angular.module('lastfm-nowplaying', [])
       angular.element(image).attr('src', imgUrl);
       e.appendChild(image);
     };
+
+    var createText = function(e, latestTrack){
+
+      var header = document.createElement('h3');
+      angular.element(header).text('Now Playing');
+
+      var trackTitle = document.createElement('p');
+      angular.element(trackTitle).addClass('track')
+                                .text(latestTrack.title);
+
+      var trackArtist = document.createElement('p');
+      angular.element(trackArtist).addClass('artist')
+                                .text(latestTrack.artist);
+
+      var div = document.createElement('div');
+      angular.element(div).attr('class', 'text');
+      div.appendChild(header);
+      div.appendChild(trackTitle);
+      div.appendChild(trackArtist);
+
+      e.appendChild(div);
+    }
 
     return {
       create: create
@@ -74,12 +97,14 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('lastFmParser', [function(){
 
-    var getLatestTrack = function(lastFMApiData){
+      var getLatestTrack = function(lastFMApiData){
       var latestTrack = lastFMApiData.data.recenttracks.track[0]
 
       console.log('latestTrack', latestTrack);
 
       return {
+        title: latestTrack.name,
+        artist: latestTrack.artist['#text'],
         largeImgUrl: latestTrack.image[2]['#text'],
         xLargeImgUrl: latestTrack.image[3]['#text']
       }
