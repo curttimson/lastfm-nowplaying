@@ -7,4 +7,8 @@
   .lastfm-nowplaying canvas {
     position: absolute;
     left: 0;
-    top: 0; }
+    top: 0;
+    z-index: 0; }
+  .lastfm-nowplaying img {
+    z-index: 1;
+    position: relative; }
