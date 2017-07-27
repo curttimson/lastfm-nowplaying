@@ -21,8 +21,9 @@
   }
 
   .text{
-    &.white{
-      color:#fff;
+    color:#fff;
+    &.black{
+      color:#000;
     }
   }
 }

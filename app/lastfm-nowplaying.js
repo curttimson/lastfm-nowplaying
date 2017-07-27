@@ -30,7 +30,7 @@ angular.module('lastfm-nowplaying', [])
     var create = function(e, scope, latestTrack){
       createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
         createImage(e, latestTrack.largeImgUrl);
-        createText(e, latestTrack, data.useWhiteText);
+        createText(e, latestTrack, data.useBlackText);
       });
     }
 
@@ -48,14 +48,14 @@ angular.module('lastfm-nowplaying', [])
 
           console.log('canvasColor', canvasColor);
 
-          var useWhiteText = true;
+          var useBlackText = false;
           if ((canvasColor.r*0.299 + canvasColor.g*0.587 + canvasColor.b*0.114) > 186){
-            useWhiteText = false;
+            useBlackText = true;
           }
-          console.log('useWhiteText', useWhiteText);
+          console.log('useBlackText', useBlackText);
 
           defer.resolve({
-            useWhiteText: useWhiteText
+            useBlackText: useBlackText
           });
 
         },200);
@@ -95,7 +95,7 @@ angular.module('lastfm-nowplaying', [])
       e.appendChild(image);
     };
 
-    var createText = function(e, latestTrack, useWhiteText){
+    var createText = function(e, latestTrack, useBlackText){
 
       var header = document.createElement('h3');
       angular.element(header).text('Now Playing');
@@ -110,7 +110,7 @@ angular.module('lastfm-nowplaying', [])
 
       var div = document.createElement('div');
       angular.element(div).addClass('text');
-      angular.element(div).toggleClass('white', useWhiteText);
+      angular.element(div).toggleClass('black', useBlackText);
       div.appendChild(header);
       div.appendChild(trackTitle);
       div.appendChild(trackArtist);

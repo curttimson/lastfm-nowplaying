@@ -14,5 +14,7 @@
     z-index: 1;
     position: relative;
     display: inline-block; }
-  .lastfm-nowplaying .text.white {
+  .lastfm-nowplaying .text {
     color: #fff; }
+    .lastfm-nowplaying .text.black {
+      color: #000; }
