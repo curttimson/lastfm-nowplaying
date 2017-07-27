@@ -17,7 +17,7 @@ angular.module('lastfm-nowplaying', [])
         angular.forEach(element, function(e,i){
 
           angular.element(element).addClass('lastfm-nowplaying');
-          createCanvas(e, scope, latestTrack.largeImgUrl);
+          createCanvas(e, scope, latestTrack.xLargeImgUrl);
 
         });
 
@@ -44,7 +44,6 @@ angular.module('lastfm-nowplaying', [])
 
       var defer = $q.defer();
       $http.get(apiUrl).then(function(data){
-        console.log('data', data);
         defer.resolve(data);
       });
       return defer.promise;
@@ -60,8 +59,11 @@ angular.module('lastfm-nowplaying', [])
     var getLatestTrack = function(lastFMApiData){
       var latestTrack = lastFMApiData.data.recenttracks.track[0]
 
+      console.log('latestTrack', latestTrack);
+
       return {
-        largeImgUrl: latestTrack.image[3]['#text']
+        largeImgUrl: latestTrack.image[2]['#text'],
+        xLargeImgUrl: latestTrack.image[3]['#text']
       }
     }
 
@@ -72,11 +74,7 @@ angular.module('lastfm-nowplaying', [])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
     var applyUI = function(e, canvas, imgUrl){
-
-      imageFx.blur($(e), canvas, 6, imgUrl, function(){
-        console.log('blur done');
-      });
-
+      imageFx.blur($(e), canvas, 6, imgUrl);
     };
 
     return {
