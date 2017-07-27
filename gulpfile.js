@@ -4,14 +4,14 @@ var sass = require('gulp-sass');
 gulp.task('dev', ['sass-watch']);
 
 var sassPaths = [
-  './app/**/*.scss',
+  './src/**/*.scss',
   './example/**/*.scss'
 ];
 
-gulp.task('sass-app', function () {
+gulp.task('sass-src', function () {
   return gulp.src(sassPaths[0])
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./app'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('sass-example', function () {
@@ -21,6 +21,6 @@ gulp.task('sass-example', function () {
 });
 
 gulp.task('sass-watch', function(){
-  gulp.watch(sassPaths[0], ['sass-app']);
+  gulp.watch(sassPaths[0], ['sass-src']);
   gulp.watch(sassPaths[1], ['sass-example']);
 });
