@@ -214,7 +214,7 @@ angular.module('lastfm-nowplaying', [])
             marginLeft = $container.width() - $canvas.width();
 
           } else {
-            $canvas.width($container.width());
+            $canvas.width($container.outerWidth());
             $canvas.height($canvas.width() * (image.height / image.width));
           }
 
