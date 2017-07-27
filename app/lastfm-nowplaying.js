@@ -1,5 +1,5 @@
 angular.module('lastfm-nowplaying', [])
-  .directive('lastfmnowplaying', ['lastFmAPI', 'canvasUI', function(lastFmAPI, canvasUI){
+  .directive('lastfmnowplaying', ['lastFmAPI', 'canvasUI', 'lastFmParser', function(lastFmAPI, canvasUI, lastFmParser){
 
     var createCanvas = function(e, scope, data){
       var canvas = document.createElement('canvas');
@@ -52,6 +52,16 @@ angular.module('lastfm-nowplaying', [])
       getLatestScrobbles: getLatestScrobbles
     };
 
+  }])
+  .factory('lastFmParser', [function(){
+
+    var getLatestTrack = function(){
+
+    }
+
+    return {
+      getLatestTrack: getLatestTrack
+    }
   }])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
