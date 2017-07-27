@@ -44,15 +44,12 @@ angular.module('lastfm-nowplaying', [])
 
         setTimeout(function(){
 
-          var canvasColor = getCanvasColor(canvas);
-
-          console.log('canvasColor', canvasColor);
+          var canvasColor = canvasUI.getAverageCanvasColor(canvas);
 
           var useBlackText = false;
           if ((canvasColor.r*0.299 + canvasColor.g*0.587 + canvasColor.b*0.114) > 186){
             useBlackText = true;
           }
-          console.log('useBlackText', useBlackText);
 
           defer.resolve({
             useBlackText: useBlackText
@@ -65,29 +62,6 @@ angular.module('lastfm-nowplaying', [])
       return defer.promise;
 
     };
-
-    var getCanvasColor = function(canvas){
-      var width = canvas.width;
-      var height = canvas.height;
-      var ctx = canvas.getContext('2d');
-      var imageData = ctx.getImageData(0, 0, width, height);
-      var data = imageData.data;
-      var r = 0;
-      var g = 0;
-      var b = 0;
-
-      for (var i = 0, l = data.length; i < l; i += 4) {
-        r += data[i];
-        g += data[i+1];
-        b += data[i+2];
-      }
-
-      r = Math.floor(r / (data.length / 4));
-      g = Math.floor(g / (data.length / 4));
-      b = Math.floor(b / (data.length / 4));
-
-      return { r: r, g: g, b: b };
-    }
 
     var createImage = function(e, imgUrl){
       var image = document.createElement('img');
@@ -172,8 +146,32 @@ angular.module('lastfm-nowplaying', [])
       });
     };
 
+    var getAverageCanvasColor = function(canvas){
+      var width = canvas.width;
+      var height = canvas.height;
+      var ctx = canvas.getContext('2d');
+      var imageData = ctx.getImageData(0, 0, width, height);
+      var data = imageData.data;
+      var r = 0;
+      var g = 0;
+      var b = 0;
+
+      for (var i = 0, l = data.length; i < l; i += 4) {
+        r += data[i];
+        g += data[i+1];
+        b += data[i+2];
+      }
+
+      r = Math.floor(r / (data.length / 4));
+      g = Math.floor(g / (data.length / 4));
+      b = Math.floor(b / (data.length / 4));
+
+      return { r: r, g: g, b: b };
+    }
+
     return {
-      applyUI: applyUI
+      applyUI: applyUI,
+      getAverageCanvasColor: getAverageCanvasColor
     };
 
   }])
