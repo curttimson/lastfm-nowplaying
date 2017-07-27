@@ -29,8 +29,16 @@ angular.module('lastfm-nowplaying', [])
 
     var create = function(e, scope, latestTrack){
       createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
-        createArtwork(e, latestTrack.largeImgUrl);
-        createText(e, latestTrack, data.useBlackText);
+
+        var container = document.createElement('div');
+        if (scope.config.containerClass){
+          angular.element(container).addClass(scope.config.containerClass);
+        }
+
+        createArtwork(container, latestTrack.largeImgUrl);
+        createText(container, latestTrack, data.useBlackText);
+
+        e.appendChild(container);
       });
     }
 

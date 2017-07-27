@@ -1,6 +1,6 @@
 {
   "name": "lastfm-nowplaying",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Last.fm \"Now Playing\" AngularJs Module",
   "main": "index.js",
   "scripts": {
