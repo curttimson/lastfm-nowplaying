@@ -231,8 +231,6 @@ angular.module('lastfm-nowplaying', [])
                 canvasImage.blur(blurAmount);
                 maintainRatio($(element), $(canvas), image);
 
-                element.addClass('loaded');
-
               if(callback) {
                 callback();
               }
