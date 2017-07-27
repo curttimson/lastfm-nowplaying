@@ -1,21 +1,23 @@
 angular.module('lastfm-nowplaying', [])
   .directive('lastfmnowplaying', ['lastFmAPI', 'canvasUI', 'lastFmParser', function(lastFmAPI, canvasUI, lastFmParser){
 
-    var createCanvas = function(e, scope, data){
+    var createCanvas = function(e, scope, imgUrl){
       var canvas = document.createElement('canvas');
       var context = canvas.getContext('2d');
       e.appendChild(canvas);
-      canvasUI.applyUI(e, canvas, data);
+      canvasUI.applyUI(e, canvas, imgUrl);
     };
 
     var link = function(scope, element, attrs){
 
       lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
 
+        var latestTrack = lastFmParser.getLatestTrack(data);
+
         angular.forEach(element, function(e,i){
 
           angular.element(element).addClass('lastfm-nowplaying');
-          createCanvas(e, scope, data);
+          createCanvas(e, scope, latestTrack.largeImgUrl);
 
         });
 
@@ -55,8 +57,12 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('lastFmParser', [function(){
 
-    var getLatestTrack = function(){
+    var getLatestTrack = function(lastFMApiData){
+      var latestTrack = lastFMApiData.data.recenttracks.track[0]
 
+      return {
+        largeImgUrl: latestTrack.image[3]['#text']
+      }
     }
 
     return {
@@ -65,9 +71,7 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
-    var applyUI = function(e, canvas, lastFmData){
-
-      var imgUrl = lastFmData.data.recenttracks.track[0].image[3]['#text'];
+    var applyUI = function(e, canvas, imgUrl){
 
       imageFx.blur($(e), canvas, 6, imgUrl, function(){
         console.log('blur done');
