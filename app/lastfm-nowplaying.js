@@ -25,17 +25,21 @@ angular.module('lastfm-nowplaying', [])
       link: link
     };
   }])
-  .factory('uiCreation', ['canvasUI', function(canvasUI){
+  .factory('uiCreation', ['$q', 'canvasUI', function($q, canvasUI){
 
     var create = function(e, scope, latestTrack){
-      createCanvas(e, scope, latestTrack.xLargeImgUrl);
-      createImage(e, latestTrack.largeImgUrl);
-      createText(e, latestTrack);
+      createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
+        createImage(e, latestTrack.largeImgUrl);
+        createText(e, latestTrack, data.useWhiteText);
+      });
     }
 
     var createCanvas = function(e, scope, imgUrl){
       var canvas = document.createElement('canvas');
       e.appendChild(canvas);
+
+      var defer = $q.defer();
+
       canvasUI.applyUI(e, canvas, imgUrl, function(){
 
         setTimeout(function(){
@@ -50,10 +54,15 @@ angular.module('lastfm-nowplaying', [])
           }
           console.log('useWhiteText', useWhiteText);
 
-        },1000);
+          defer.resolve({
+            useWhiteText: useWhiteText
+          });
+
+        },200);
 
       });
 
+      return defer.promise;
 
     };
 
@@ -86,7 +95,7 @@ angular.module('lastfm-nowplaying', [])
       e.appendChild(image);
     };
 
-    var createText = function(e, latestTrack){
+    var createText = function(e, latestTrack, useWhiteText){
 
       var header = document.createElement('h3');
       angular.element(header).text('Now Playing');
@@ -100,7 +109,8 @@ angular.module('lastfm-nowplaying', [])
                                 .text(latestTrack.artist);
 
       var div = document.createElement('div');
-      angular.element(div).attr('class', 'text');
+      angular.element(div).addClass('text');
+      angular.element(div).addClass('white', useWhiteText);
       div.appendChild(header);
       div.appendChild(trackTitle);
       div.appendChild(trackArtist);
