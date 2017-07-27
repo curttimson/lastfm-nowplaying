@@ -1,12 +1,5 @@
 angular.module('lastfm-nowplaying', [])
-  .directive('lastfmnowplaying', ['lastFmAPI', 'canvasUI', 'lastFmParser', function(lastFmAPI, canvasUI, lastFmParser){
-
-    var createCanvas = function(e, scope, imgUrl){
-      var canvas = document.createElement('canvas');
-      var context = canvas.getContext('2d');
-      e.appendChild(canvas);
-      canvasUI.applyUI(e, canvas, imgUrl);
-    };
+  .directive('lastfmnowplaying', ['uiCreation', 'lastFmAPI', 'lastFmParser', function(uiCreation, lastFmAPI, lastFmParser){
 
     var link = function(scope, element, attrs){
 
@@ -17,7 +10,7 @@ angular.module('lastfm-nowplaying', [])
         angular.forEach(element, function(e,i){
 
           angular.element(element).addClass('lastfm-nowplaying');
-          createCanvas(e, scope, latestTrack.xLargeImgUrl);
+          uiCreation.createCanvas(e, scope, latestTrack.xLargeImgUrl);
 
         });
 
@@ -31,6 +24,20 @@ angular.module('lastfm-nowplaying', [])
       },
       link: link
     };
+  }])
+  .factory('uiCreation', ['canvasUI', function(canvasUI){
+
+    var createCanvas = function(e, scope, imgUrl){
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+      e.appendChild(canvas);
+      canvasUI.applyUI(e, canvas, imgUrl);
+    };
+
+    return {
+      createCanvas: createCanvas
+    };
+
   }])
   .factory('lastFmAPI', ['$q', '$http', function($q, $http){
 
