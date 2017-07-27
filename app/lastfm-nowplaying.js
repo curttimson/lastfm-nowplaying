@@ -10,7 +10,7 @@ angular.module('lastfm-nowplaying', [])
         angular.forEach(element, function(e,i){
 
           angular.element(element).addClass('lastfm-nowplaying');
-          uiCreation.createCanvas(e, scope, latestTrack.xLargeImgUrl);
+          uiCreation.create(e, scope, latestTrack);
 
         });
 
@@ -27,6 +27,11 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('uiCreation', ['canvasUI', function(canvasUI){
 
+    var create = function(e, scope, latestTrack){
+      createCanvas(e, scope, latestTrack.xLargeImgUrl);
+      createImage(e, latestTrack.largeImgUrl);
+    }
+
     var createCanvas = function(e, scope, imgUrl){
       var canvas = document.createElement('canvas');
       var context = canvas.getContext('2d');
@@ -34,8 +39,14 @@ angular.module('lastfm-nowplaying', [])
       canvasUI.applyUI(e, canvas, imgUrl);
     };
 
+    var createImage = function(e, imgUrl){
+      var image = document.createElement('img');
+      angular.element(image).attr('src', imgUrl);
+      e.appendChild(image);
+    };
+
     return {
-      createCanvas: createCanvas
+      create: create
     };
 
   }])
