@@ -19,4 +19,11 @@
     position: relative;
     display: inline-block;
   }
+
+  .text{
+    color:#fff;
+    &.black{
+      color:#000;
+    }
+  }
 }

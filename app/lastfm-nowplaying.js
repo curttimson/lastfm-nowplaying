@@ -25,19 +25,42 @@ angular.module('lastfm-nowplaying', [])
       link: link
     };
   }])
-  .factory('uiCreation', ['canvasUI', function(canvasUI){
+  .factory('uiCreation', ['$q', 'canvasUI', function($q, canvasUI){
 
     var create = function(e, scope, latestTrack){
-      createCanvas(e, scope, latestTrack.xLargeImgUrl);
-      createImage(e, latestTrack.largeImgUrl);
-      createText(e, latestTrack);
+      createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
+        createImage(e, latestTrack.largeImgUrl);
+        createText(e, latestTrack, data.useBlackText);
+      });
     }
 
     var createCanvas = function(e, scope, imgUrl){
       var canvas = document.createElement('canvas');
-      var context = canvas.getContext('2d');
       e.appendChild(canvas);
-      canvasUI.applyUI(e, canvas, imgUrl);
+
+      var defer = $q.defer();
+
+      canvasUI.applyUI(e, canvas, imgUrl, function(){
+
+        setTimeout(function(){
+
+          var canvasColor = canvasUI.getAverageCanvasColor(canvas);
+
+          var useBlackText = false;
+          if ((canvasColor.r*0.299 + canvasColor.g*0.587 + canvasColor.b*0.114) > 186){
+            useBlackText = true;
+          }
+
+          defer.resolve({
+            useBlackText: useBlackText
+          });
+
+        },200);
+
+      });
+
+      return defer.promise;
+
     };
 
     var createImage = function(e, imgUrl){
@@ -46,7 +69,7 @@ angular.module('lastfm-nowplaying', [])
       e.appendChild(image);
     };
 
-    var createText = function(e, latestTrack){
+    var createText = function(e, latestTrack, useBlackText){
 
       var header = document.createElement('h3');
       angular.element(header).text('Now Playing');
@@ -60,7 +83,8 @@ angular.module('lastfm-nowplaying', [])
                                 .text(latestTrack.artist);
 
       var div = document.createElement('div');
-      angular.element(div).attr('class', 'text');
+      angular.element(div).addClass('text');
+      angular.element(div).toggleClass('black', useBlackText);
       div.appendChild(header);
       div.appendChild(trackTitle);
       div.appendChild(trackArtist);
@@ -116,12 +140,38 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
-    var applyUI = function(e, canvas, imgUrl){
-      imageFx.blur($(e), canvas, 6, imgUrl);
+    var applyUI = function(e, canvas, imgUrl, callback){
+      imageFx.blur($(e), canvas, 6, imgUrl, function(){
+        callback();
+      });
     };
 
+    var getAverageCanvasColor = function(canvas){
+      var width = canvas.width;
+      var height = canvas.height;
+      var ctx = canvas.getContext('2d');
+      var imageData = ctx.getImageData(0, 0, width, height);
+      var data = imageData.data;
+      var r = 0;
+      var g = 0;
+      var b = 0;
+
+      for (var i = 0, l = data.length; i < l; i += 4) {
+        r += data[i];
+        g += data[i+1];
+        b += data[i+2];
+      }
+
+      r = Math.floor(r / (data.length / 4));
+      g = Math.floor(g / (data.length / 4));
+      b = Math.floor(b / (data.length / 4));
+
+      return { r: r, g: g, b: b };
+    }
+
     return {
-      applyUI: applyUI
+      applyUI: applyUI,
+      getAverageCanvasColor: getAverageCanvasColor
     };
 
   }])
@@ -182,16 +232,15 @@ angular.module('lastfm-nowplaying', [])
             var image, canvasImage;
 
             image = document.createElement("img");
+            image.crossOrigin = "Anonymous";
             image.onload = function () {
 
                 canvasImage = new CanvasImage(canvas, this);
                 canvasImage.blur(blurAmount);
                 maintainRatio($(element), $(canvas), image);
 
-                element.addClass('loaded');
-
               if(callback) {
-                  callback();
+                callback();
               }
             };
             image.src = src;
@@ -203,12 +252,11 @@ angular.module('lastfm-nowplaying', [])
         };
 
         return {
-            blur: function (element, blurAmount, src, callback) {
-
+            blur: function (element, canvas, blurAmount, src, callback) {
                 var canvasSupported = !!$window.HTMLCanvasElement;
                 if(canvasSupported) {
 
-                    return blurGenerator(element, blurAmount, src, callback);
+                    return blurGenerator(element, canvas, blurAmount, src, callback);
                 } else {
                     return false;
                 }
