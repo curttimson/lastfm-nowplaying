@@ -1,23 +1,28 @@
 .lastfm-nowplaying {
-  padding: 20px;
+  padding: 30px;
   overflow: hidden;
   position: relative;
-  height: 200px;
+  height: 185px;
   box-sizing: border-box; }
   .lastfm-nowplaying canvas {
     position: absolute;
     left: 0;
     top: 0;
     z-index: 0; }
-  .lastfm-nowplaying img,
+  .lastfm-nowplaying .artwork,
   .lastfm-nowplaying .text {
     z-index: 1;
     position: relative;
-    display: inline-block; }
-  .lastfm-nowplaying img {
-    height: 100%; }
+    float: left; }
+  .lastfm-nowplaying .artwork {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 125px;
+    height: 125px; }
   .lastfm-nowplaying .text {
-    color: #fff; }
+    color: #fff;
+    padding-left: 20px; }
     .lastfm-nowplaying .text.black {
       color: #000; }
     .lastfm-nowplaying .text h3 {

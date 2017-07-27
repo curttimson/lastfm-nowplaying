@@ -1,9 +1,9 @@
 .lastfm-nowplaying{
 
-  padding:20px;
+  padding:30px;
   overflow: hidden;
   position: relative;
-  height: 200px;
+  height: 185px;
   box-sizing: border-box;
 
   canvas{
@@ -13,19 +13,24 @@
     z-index:0;
   }
 
-  img,
+  .artwork,
   .text{
     z-index:1;
     position: relative;
-    display: inline-block;
+    float: left;
   }
 
-  img{
-    height:100%;
+  .artwork{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width:125px;
+    height:125px;
   }
 
   .text{
     color:#fff;
+    padding-left:20px;
     &.black{
       color:#000;
     }

@@ -29,7 +29,7 @@ angular.module('lastfm-nowplaying', [])
 
     var create = function(e, scope, latestTrack){
       createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
-        createImage(e, latestTrack.largeImgUrl);
+        createArtwork(e, latestTrack.largeImgUrl);
         createText(e, latestTrack, data.useBlackText);
       });
     }
@@ -63,10 +63,11 @@ angular.module('lastfm-nowplaying', [])
 
     };
 
-    var createImage = function(e, imgUrl){
-      var image = document.createElement('img');
-      angular.element(image).attr('src', imgUrl);
-      e.appendChild(image);
+    var createArtwork = function(e, imgUrl){
+      var artwork = document.createElement('div');
+      angular.element(artwork).attr('style', 'background-image:url(' + imgUrl + ');')
+                            .addClass('artwork');
+      e.appendChild(artwork);
     };
 
     var createText = function(e, latestTrack, useBlackText){
