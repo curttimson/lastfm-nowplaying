@@ -110,7 +110,7 @@ angular.module('lastfm-nowplaying', [])
 
       var div = document.createElement('div');
       angular.element(div).addClass('text');
-      angular.element(div).addClass('white', useWhiteText);
+      angular.element(div).toggleClass('white', useWhiteText);
       div.appendChild(header);
       div.appendChild(trackTitle);
       div.appendChild(trackArtist);
