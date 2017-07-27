@@ -184,7 +184,7 @@ angular.module('lastfm-nowplaying', [])
     };
 
   }])
-  .factory('imageFx', function ($window, $timeout) {
+  .factory('imageFx', ['$window', '$timeout', function ($window, $timeout) {
 
         var CanvasImage = function (e, t) {
             this.image = t;
@@ -270,4 +270,4 @@ angular.module('lastfm-nowplaying', [])
                 }
             }
         };
-    });
+    }]);
