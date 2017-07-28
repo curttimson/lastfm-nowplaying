@@ -17,13 +17,13 @@
       <h1>Last.fm Now Playing</h1>
       <form>
         <p>
-          <input type='text' placeholder="Username" />
+          <input type='text' placeholder="Username" ng-model="username" />
         </p>
         <p>
-          <input type='text' placeholder="API Key" />
+          <input type='text' placeholder="API Key" ng-model="apiKey" />
         </p>
         <p>
-          <button>Load Last.fm Now Playing</button>
+          <button ng-click="loadLastFM()">Load Last.fm Now Playing</button>
         </p>
       </form>
     </div>

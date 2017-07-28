@@ -3,18 +3,28 @@ angular.module('lastfm-nowplaying', [])
 
     var link = function(scope, element, attrs){
 
-      lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
+      scope.$watch('config', function(value) {
+        load();
+      });
 
-        var latestTrack = lastFmParser.getLatestTrack(data);
+      var load = function(){
 
-        angular.forEach(element, function(e,i){
+        lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
 
-          angular.element(element).addClass('lastfm-nowplaying');
-          uiCreation.create(e, scope, latestTrack);
+          var latestTrack = lastFmParser.getLatestTrack(data);
+
+          angular.forEach(element, function(e,i){
+
+            angular.element(element).addClass('lastfm-nowplaying');
+            uiCreation.create(e, scope, latestTrack);
+
+          });
 
         });
 
-      });
+      }
+
+      load();
 
     };
 
