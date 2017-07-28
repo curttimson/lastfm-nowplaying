@@ -8,9 +8,16 @@ body {
   max-width: 768px;
   font-family: 'Montserrat', sans-serif; }
 
-form input {
+form input,
+form button {
   width: 75%;
   padding: 8px;
   font-size: 1.4em;
-  border-radius: 6px;
+  border-radius: 6px; }
+
+form input {
   border: 1px solid #ccc; }
+
+form button {
+  border: 0;
+  cursor: pointer; }

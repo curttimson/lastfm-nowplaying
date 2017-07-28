@@ -11,11 +11,18 @@ body{
 }
 
 form{
-  input{
+  input,
+  button{
     width:75%;
     padding:8px;
     font-size: 1.4em;
     border-radius: 6px;
+  }
+  input{
     border:1px solid #ccc;
+  }
+  button{
+    border:0;
+    cursor: pointer;
   }
 }
