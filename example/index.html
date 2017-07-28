@@ -15,6 +15,14 @@
   <body ng-app="app" ng-controller="mainCtrl">
     <div class="content">
       <h1>Last.fm Now Playing</h1>
+      <form>
+        <p>
+          <input type='text' placeholder="Username" />
+        </p>
+        <p>
+          <input type='text' placeholder="API Key" />
+        </p>
+      </form>
     </div>
     <div lastfmnowplaying config="lastFmConfig"></div>
   </body>
