@@ -53,6 +53,9 @@ angular.module('lastfm-nowplaying', [])
     }
 
     var createCanvas = function(e, scope, imgUrl){
+
+      e.innerHTML = '';
+
       var canvas = document.createElement('canvas');
       e.appendChild(canvas);
 
