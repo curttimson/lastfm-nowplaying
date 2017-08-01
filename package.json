@@ -1,6 +1,6 @@
 {
   "name": "lastfm-nowplaying",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Last.fm \"Now Playing\" AngularJs Module",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,9 @@
   "homepage": "https://github.com/curttimson/lastfm-nowplaying#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.2.0",
     "gulp-minify": "^1.0.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0"
   }
 }
