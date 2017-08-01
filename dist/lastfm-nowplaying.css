@@ -14,9 +14,9 @@
   .lastfm-nowplaying .artwork,
   .lastfm-nowplaying .text {
     z-index: 1;
-    position: relative;
-    float: left; }
+    position: relative; }
   .lastfm-nowplaying .artwork {
+    float: left;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -24,9 +24,15 @@
     height: 125px; }
   .lastfm-nowplaying .text {
     color: #fff;
-    padding-left: 20px; }
+    padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden; }
     .lastfm-nowplaying .text.black {
       color: #000; }
+    .lastfm-nowplaying .text h3,
+    .lastfm-nowplaying .text p {
+      text-overflow: ellipsis;
+      overflow: hidden; }
     .lastfm-nowplaying .text h3 {
       margin: 0;
       margin-bottom: 32px;

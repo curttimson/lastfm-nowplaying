@@ -1,5 +1,8 @@
 .lastfm-nowplaying{
 
+  $artwork-size:125px;
+  $artwork-size-small:100px;
+
   padding:30px;
   overflow: hidden;
   position: relative;
@@ -19,22 +22,31 @@
   .text{
     z-index:1;
     position: relative;
-    float: left;
   }
 
   .artwork{
+    float: left;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width:125px;
-    height:125px;
+    width:$artwork-size;
+    height:$artwork-size;
   }
 
   .text{
     color:#fff;
     padding-left:20px;
+    white-space: nowrap;
+    overflow: hidden;
+
     &.black{
       color:#000;
+    }
+
+    h3,
+    p{
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     h3{
@@ -63,8 +75,8 @@
     height: 140px;
 
     .artwork{
-      width:100px;
-      height:100px;
+      width:$artwork-size-small;
+      height:$artwork-size-small;
     }
 
     .text{
