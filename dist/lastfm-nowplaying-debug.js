@@ -26,8 +26,6 @@ angular.module('lastfm-nowplaying', [])
 
       }
 
-      load();
-
     };
 
     return {
