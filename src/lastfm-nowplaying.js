@@ -42,6 +42,8 @@ angular.module('lastfm-nowplaying', [])
     var create = function(e, scope, latestTrack){
       createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
 
+        angular.element(e).find('div').remove();
+
         var container = document.createElement('div');
         if (scope.config.containerClass){
           angular.element(container).addClass(scope.config.containerClass);
