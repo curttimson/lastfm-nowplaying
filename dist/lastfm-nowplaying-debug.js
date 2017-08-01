@@ -20,6 +20,8 @@ angular.module('lastfm-nowplaying', [])
 
           });
 
+        }, function(reason) {
+          //Last.fm failure
         });
 
       }
@@ -123,16 +125,25 @@ angular.module('lastfm-nowplaying', [])
 
     var getLatestScrobbles = function(config){
 
-      var apiUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks'
-                    + '&user=' + config.user
-                    + '&api_key=' + config.apiKey
-                    + '&format=json&limit=2';
-
-
       var defer = $q.defer();
-      $http.get(apiUrl).then(function(data){
-        defer.resolve(data);
-      });
+
+      if (config && config.user && config.apiKey){
+
+        var apiUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks'
+                      + '&user=' + config.user
+                      + '&api_key=' + config.apiKey
+                      + '&format=json&limit=2';
+
+
+
+        $http.get(apiUrl).then(function(data){
+          defer.resolve(data);
+        });
+
+      }
+      else{
+        defer.reject('user or apiKey missing');
+      }
       return defer.promise;
     };
 
