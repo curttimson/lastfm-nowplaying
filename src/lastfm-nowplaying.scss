@@ -34,19 +34,22 @@
   }
 
   .text{
-    color:#fff;
     padding-left:20px;
     white-space: nowrap;
     overflow: hidden;
-
-    &.black{
-      color:#000;
-    }
 
     h3,
     p{
       text-overflow: ellipsis;
       overflow: hidden;
+      color:#fff;
+    }
+
+    &.black{
+      h3,
+      p{
+        color:#000;
+      }
     }
 
     h3{
