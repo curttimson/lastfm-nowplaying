@@ -155,9 +155,7 @@ angular.module('lastfm-nowplaying', [])
   .factory('lastFmParser', [function(){
 
       var getLatestTrack = function(lastFMApiData){
-      var latestTrack = lastFMApiData.data.recenttracks.track[0]
-
-      console.log('latestTrack', latestTrack);
+      var latestTrack = lastFMApiData.data.recenttracks.track[0];
 
       return {
         title: latestTrack.name,
