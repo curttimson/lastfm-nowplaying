@@ -96,7 +96,7 @@ angular.module('lastfm-nowplaying', [])
     var createText = function(e, latestTrack, useBlackText){
 
       var header = document.createElement('h3');
-      angular.element(header).text('Now Playing');
+      angular.element(header).text('Listening To');
 
       var trackTitle = document.createElement('p');
       angular.element(trackTitle).addClass('track')
