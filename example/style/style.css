@@ -8,6 +8,9 @@ body {
   max-width: 768px;
   font-family: 'Montserrat', sans-serif; }
 
+.description {
+  padding-bottom: 20px; }
+
 form input,
 form button {
   width: 75%;
@@ -20,4 +23,8 @@ form input {
 
 form button {
   border: 0;
-  cursor: pointer; }
+  cursor: pointer;
+  background-color: #b90000;
+  color: #fff; }
+  form button:hover {
+    background-color: #d50000; }

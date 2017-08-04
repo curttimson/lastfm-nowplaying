@@ -5,6 +5,10 @@ Last.fm "Now Playing" AngularJs Module
 
 ![](https://user-images.githubusercontent.com/15653985/28939280-af86aa30-7888-11e7-8c63-81ca50066192.png)
 
+### Try it yourself
+
+https://curttimson.github.io/lastfm-nowplaying/
+
 ## Installation
 
 ```
@@ -39,8 +43,5 @@ Please feel free to help develop this further. Below are the CLI steps you'll re
 
 ```
 npm install
-```
-
-```
 gulp dev
 ```

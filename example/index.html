@@ -2,18 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Lastfm-NowPlaying AngularJs Module</title>
     <link href='style/style.css' rel="stylesheet" />
-    <link href='../dist/lastfm-nowplaying.min.css' rel="stylesheet" />
+    <link href='lastfm-nowplaying/lastfm-nowplaying.min.css' rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <script src="../node_modules/angular/angular.min.js"></script>
-    <script src="scripts/app.js"></script>
-    <script src="../dist/lastfm-nowplaying-debug.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body ng-app="app" ng-controller="mainCtrl">
     <div class="content">
       <h1>Last.fm Now Playing</h1>
+      <div class="description">
+        <p>
+          Last.fm Now Playing AngularJs Module
+        </p>
+        <p>
+          <a href='https://github.com/curttimson/lastfm-nowplaying'>https://github.com/curttimson/lastfm-nowplaying</a>
+        </p>
+      </div>
       <form>
         <p>
           <input type='text' placeholder="Username" ng-model="username" />
@@ -27,5 +32,8 @@
       </form>
     </div>
     <div lastfmnowplaying config="lastFmConfig"></div>
+    <script src="npm/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="lastfm-nowplaying/lastfm-nowplaying-debug.js"></script>
   </body>
 </html>

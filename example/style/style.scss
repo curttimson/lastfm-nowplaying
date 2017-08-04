@@ -10,6 +10,10 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 
+.description{
+  padding-bottom: 20px;
+}
+
 form{
   input,
   button{
@@ -24,5 +28,10 @@ form{
   button{
     border:0;
     cursor: pointer;
+    background-color: #b90000;
+    color:#fff;
+    &:hover{
+      background-color: #d50000;
+    }
   }
 }
