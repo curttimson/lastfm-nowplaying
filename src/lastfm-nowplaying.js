@@ -232,7 +232,10 @@ angular.module('lastfm-nowplaying', [])
             }
         };
 
-        var maintainRatio = function($container, $canvas, image) {
+        var maintainRatio = function(container, canvas, image) {
+
+          var $container = $(container);
+          var $canvas = $(canvas);
 
           var marginLeft = 0;
           var marginTop = 0;
@@ -262,7 +265,7 @@ angular.module('lastfm-nowplaying', [])
             var image, canvasImage;
 
             var _maintainRatio = function(){
-              maintainRatio($(element), $(canvas), image);
+              maintainRatio(element, canvas, image);
             };
 
             image = document.createElement("img");
