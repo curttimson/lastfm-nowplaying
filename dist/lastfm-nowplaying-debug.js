@@ -240,19 +240,19 @@ angular.module('lastfm-nowplaying', [])
           var marginLeft = 0;
           var marginTop = 0;
 
-          if((image.width / image.height) > ($container.width() / $container.height)) {
+          if((image.width / image.height) > (container.clientWidth / container.clientHeight)) {
 
-            canvas.style.height = $container.height() + "px";
+            canvas.style.height = container.clientHeight + "px";
             canvas.style.width = ($canvas.height() * (image.width / image.height)) + "px";
 
             marginLeft = $container.width() - $canvas.width();
 
           } else {
-            canvas.style.width = ($container.outerWidth() + "px");
+            canvas.style.width = (container.clientWidth + "px");
             canvas.style.height = ($canvas.width() * (image.height / image.width)) + "px";
           }
 
-          marginTop = (($canvas.outerHeight()-$container.outerHeight())/2)*-1;
+          marginTop = (($canvas.outerHeight()-container.clientHeight)/2)*-1;
 
           $canvas.css({
             'marginLeft': marginLeft,
