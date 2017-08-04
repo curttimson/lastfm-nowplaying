@@ -96,7 +96,7 @@ angular.module('lastfm-nowplaying', [])
     var createText = function(e, latestTrack, useBlackText){
 
       var header = document.createElement('h3');
-      angular.element(header).text('Listening To');
+      angular.element(header).text(latestTrack.nowplaying ? 'Now Playing' : 'Listening To');
 
       var trackTitle = document.createElement('p');
       angular.element(trackTitle).addClass('track')
@@ -132,9 +132,7 @@ angular.module('lastfm-nowplaying', [])
         var apiUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks'
                       + '&user=' + config.user
                       + '&api_key=' + config.apiKey
-                      + '&format=json&limit=2';
-
-
+                      + '&format=json&limit=1';
 
         $http.get(apiUrl).then(function(data){
           defer.resolve(data);
@@ -161,7 +159,8 @@ angular.module('lastfm-nowplaying', [])
         title: latestTrack.name,
         artist: latestTrack.artist['#text'],
         largeImgUrl: latestTrack.image[2]['#text'],
-        xLargeImgUrl: latestTrack.image[3]['#text']
+        xLargeImgUrl: latestTrack.image[3]['#text'],
+        nowplaying: latestTrack['@attr'] && latestTrack['@attr'].nowplaying
       }
     }
 
