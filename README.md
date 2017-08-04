@@ -17,6 +17,16 @@ npm install lastfm-nowplaying
 https://www.npmjs.com/package/lastfm-nowplaying
 
 
+### Configuration
+
+ - `apiKey` - Your Last.fm API Key which can be obtained here: https://www.last.fm/api/account/create
+ - `user` - Your Last.fm username
+
+#### Optional Configuration
+
+ - `containerClass` - Allows the ability to specify a class for the content within the last.fm now playing component. This will allow you to set the same margins as the rest of your content.
+
+
 ### Example Usage
 
 ```
