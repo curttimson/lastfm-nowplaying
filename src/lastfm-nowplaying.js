@@ -261,13 +261,17 @@ angular.module('lastfm-nowplaying', [])
 
             var image, canvasImage;
 
+            var _maintainRatio = function(){
+              maintainRatio($(element), $(canvas), image);
+            };
+
             image = document.createElement("img");
             image.crossOrigin = "Anonymous";
             image.onload = function () {
 
                 canvasImage = new CanvasImage(canvas, this);
                 canvasImage.blur(blurAmount);
-                maintainRatio($(element), $(canvas), image);
+                _maintainRatio();
 
               if(callback) {
                 callback();
@@ -276,7 +280,7 @@ angular.module('lastfm-nowplaying', [])
             image.src = src;
 
             angular.element($window).bind('resize', function(){
-              maintainRatio($(element), $(canvas), image);
+              _maintainRatio();
             });
 
         };
