@@ -14,3 +14,10 @@ gulp.task("example-copy-lastfmnowplaying-files", function () {
                     './dist/lastfm-nowplaying.min.css'])
         .pipe(gulp.dest('./example/lastfm-nowplaying/'));
 });
+
+gulp.task('example-deploy', function() {
+  return gulp.src('./example/**/*')
+    .pipe(ghPages({
+      "remoteUrl": "git@github.com:curttimson/lastfm-nowplaying.git"
+    }));
+});
