@@ -3,6 +3,9 @@ var sass = require('gulp-sass');
 var minify = require('gulp-minify');
 var cssmin = require('gulp-cssmin');
 var rename = require('gulp-rename');
+var requireDir = require('require-dir');
+
+requireDir('./gulp-tasks');
 
 gulp.task('dev', ['sass-watch', 'js-watch']);
 

@@ -39,8 +39,5 @@ Please feel free to help develop this further. Below are the CLI steps you'll re
 
 ```
 npm install
-```
-
-```
 gulp dev
 ```
