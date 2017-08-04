@@ -172,7 +172,7 @@ angular.module('lastfm-nowplaying', [])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
     var applyUI = function(e, canvas, imgUrl, callback){
-      imageFx.blur($(e), canvas, 6, imgUrl, function(){
+      imageFx.blur(e, canvas, 6, imgUrl, function(){
         callback();
       });
     };
