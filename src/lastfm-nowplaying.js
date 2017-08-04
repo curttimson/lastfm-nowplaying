@@ -172,7 +172,7 @@ angular.module('lastfm-nowplaying', [])
   .factory('canvasUI', ['imageFx', function(imageFx){
 
     var applyUI = function(e, canvas, imgUrl, callback){
-      imageFx.blur($(e), canvas, 6, imgUrl, function(){
+      imageFx.blur(e, canvas, 6, imgUrl, function(){
         callback();
       });
     };
@@ -232,28 +232,27 @@ angular.module('lastfm-nowplaying', [])
             }
         };
 
-        var maintainRatio = function($container, $canvas, image) {
+        var maintainRatio = function(container, canvas, image) {
 
           var marginLeft = 0;
           var marginTop = 0;
 
-          if((image.width / image.height) > ($container.width() / $container.height)) {
+          if((image.width / image.height) > (container.clientWidth / container.clientHeight)) {
 
-            $canvas.height($container.height());
-            $canvas.width($canvas.height() * (image.width / image.height))
-            marginLeft = $container.width() - $canvas.width();
+            canvas.style.height = container.clientHeight + "px";
+            canvas.style.width = (canvas.clientHeight * (image.width / image.height)) + "px";
+
+            marginLeft = container.clientWidth - canvas.clientWidth;
 
           } else {
-            $canvas.width($container.outerWidth());
-            $canvas.height($canvas.width() * (image.height / image.width));
+            canvas.style.width = (container.clientWidth + "px");
+            canvas.style.height = (canvas.clientWidth * (image.height / image.width)) + "px";
           }
 
-          marginTop = (($canvas.outerHeight()-$container.outerHeight())/2)*-1;
+          marginTop = ((canvas.clientHeight-container.clientHeight)/2)*-1;
 
-          $canvas.css({
-            'marginLeft': marginLeft,
-            'marginTop': marginTop
-          });
+          canvas.style.marginLeft = marginLeft + 'px';
+          canvas.style.marginTop = marginTop + 'px';
 
         };
 
@@ -261,13 +260,17 @@ angular.module('lastfm-nowplaying', [])
 
             var image, canvasImage;
 
+            var _maintainRatio = function(){
+              maintainRatio(element, canvas, image);
+            };
+
             image = document.createElement("img");
             image.crossOrigin = "Anonymous";
             image.onload = function () {
 
                 canvasImage = new CanvasImage(canvas, this);
                 canvasImage.blur(blurAmount);
-                maintainRatio($(element), $(canvas), image);
+                _maintainRatio();
 
               if(callback) {
                 callback();
@@ -276,7 +279,7 @@ angular.module('lastfm-nowplaying', [])
             image.src = src;
 
             angular.element($window).bind('resize', function(){
-              maintainRatio($(element), $(canvas), image);
+              _maintainRatio();
             });
 
         };
