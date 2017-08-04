@@ -3,7 +3,7 @@ Last.fm "Now Playing" AngularJs Module
 
 ## Example
 
-![](https://user-images.githubusercontent.com/15653985/28939280-af86aa30-7888-11e7-8c63-81ca50066192.png)
+![](https://user-images.githubusercontent.com/15653985/28838108-2fcc5a1c-76e7-11e7-8282-65a3089a886c.png)
 
 ### Try it yourself
 
@@ -15,6 +15,12 @@ https://curttimson.github.io/lastfm-nowplaying/
 npm install lastfm-nowplaying
 ```
 https://www.npmjs.com/package/lastfm-nowplaying
+
+### Required Files
+```
+./node_modules/lastfm-nowplaying/dist/lastfm-nowplaying.min.js
+./node_modules/lastfm-nowplaying/dist/lastfm-nowplaying.min.css
+```
 
 
 ### Configuration
