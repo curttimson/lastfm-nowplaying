@@ -1,9 +1,7 @@
 var gulp = require("gulp");
 var ghPages = require('gulp-gh-pages');
 
-gulp.task('example-build-files', function(){
-
-});
+gulp.task('example-build-files', ['example-copy-npm-files', 'example-copy-lastfmnowplaying-files']);
 
 gulp.task("example-copy-npm-files", function () {
     return gulp.src(['./node_modules/angular/angular.min.js'])
