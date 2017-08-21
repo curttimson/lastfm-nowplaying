@@ -129,7 +129,7 @@ angular.module('lastfm-nowplaying', [])
 
       if (config && config.user && config.apiKey){
 
-        var apiUrl = 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks'
+        var apiUrl = 'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks'
                       + '&user=' + config.user
                       + '&api_key=' + config.apiKey
                       + '&format=json&limit=1';
