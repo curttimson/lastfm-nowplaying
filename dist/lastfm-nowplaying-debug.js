@@ -51,7 +51,7 @@ angular.module('lastfm-nowplaying', [])
   .factory('uiCreation', ['$q', 'canvasUI', function($q, canvasUI){
 
     var create = function(e, scope, latestTrack){
-      createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
+      createCanvas(e, latestTrack.xLargeImgUrl).then(function(data){
 
         angular.element(e).find('div').remove();
 
@@ -67,7 +67,7 @@ angular.module('lastfm-nowplaying', [])
       });
     }
 
-    var createCanvas = function(e, scope, imgUrl){
+    var createCanvas = function(e, imgUrl){
 
       e.innerHTML = '';
 
