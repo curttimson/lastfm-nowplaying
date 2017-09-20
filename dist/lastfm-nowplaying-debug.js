@@ -30,8 +30,8 @@ angular.module('lastfm-nowplaying', [])
             var latestTrack = {
               title: scope.config.title,
               artist: scope.config.artist,
-              largeImgUrl: scope.config.largeImgUrl,
-              xLargeImgUrl: scope.config.xLargeImgUrl,
+              largeImgUrl: scope.config.imgUrl,
+              xLargeImgUrl: scope.config.backgroundImgUrl,
             }
             angular.element(element).addClass('lastfm-nowplaying');
             uiCreation.create(element[0], scope.config.containerClass, latestTrack);
