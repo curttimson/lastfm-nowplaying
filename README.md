@@ -25,8 +25,19 @@ https://www.npmjs.com/package/lastfm-nowplaying
 
 ### Configuration
 
+Configuration is split between the Last.fm API option and via passing in static data.
+
+#### Last.fm API
+
  - `apiKey` - Your Last.fm API Key which can be obtained here: https://www.last.fm/api/account/create
  - `user` - Your Last.fm username
+
+#### Static Data
+
+ - `title` - Title of the track
+ - `artist` - Artist of the track
+ - `imgUrl` - Image Url used for the album art
+ - `backgroundImgUrl` Image Url used for the blurred background image
 
 #### Optional Configuration
 
