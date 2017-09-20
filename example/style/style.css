@@ -11,11 +11,19 @@ body {
 .description {
   padding-bottom: 20px; }
 
+form p {
+  width: 75%; }
+  form p.split {
+    clear: both; }
+    form p.split input {
+      width: 45%;
+      display: inline-block; }
+
 form input,
 form button {
-  width: 75%;
+  width: 100%;
   padding: 8px;
-  font-size: 1.4em;
+  font-size: 1.2em;
   border-radius: 6px; }
 
 form input {

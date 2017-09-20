@@ -6,6 +6,10 @@ angular.module('app', ['lastfm-nowplaying'])
       $scope.lastFmConfig = {
         apiKey: $scope.apiKey,
         user: $scope.username,
+        title: $scope.title,
+        artist: $scope.artist,
+        imgUrl: $scope.largeimgurl,
+        backgroundImgUrl: $scope.xlargeimgurl,
         containerClass: 'content'
       };
 
