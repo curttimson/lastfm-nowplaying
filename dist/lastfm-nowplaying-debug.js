@@ -9,20 +9,33 @@ angular.module('lastfm-nowplaying', [])
 
       var load = function(){
 
-        lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
+        if (scope.config.apiKey){
 
-          var latestTrack = lastFmParser.getLatestTrack(data);
+          lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
 
-          angular.forEach(element, function(e,i){
+            var latestTrack = lastFmParser.getLatestTrack(data);
 
-            angular.element(element).addClass('lastfm-nowplaying');
-            uiCreation.create(e, scope, latestTrack);
+            angular.forEach(element, function(e,i){
 
+              angular.element(element).addClass('lastfm-nowplaying');
+              uiCreation.create(e, scope, latestTrack);
+
+            });
+
+          }, function(reason) {
+            //Last.fm failure
           });
 
-        }, function(reason) {
-          //Last.fm failure
-        });
+        }
+        else{
+          var latestTrack = {
+            title: scope.config.title,
+            artist: scope.config.artist,
+            largeImgUrl: scope.config.largeImgUrl,
+            xLargeImgUrl: scope.config.xLargeImgUrl,
+          }
+          //TODO: Call uiCreation.create()
+        }
 
       }
 
