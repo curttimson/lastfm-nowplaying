@@ -9,34 +9,35 @@ angular.module('lastfm-nowplaying', [])
 
       var load = function(){
 
-        if (scope.config.apiKey){
+        var latestTrack;
 
-          lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
+        if (scope.config){
 
-            var latestTrack = lastFmParser.getLatestTrack(data);
+          if (scope.config.apiKey){
 
-            angular.forEach(element, function(e,i){
+            lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
 
+              latestTrack = lastFmParser.getLatestTrack(data);
               angular.element(element).addClass('lastfm-nowplaying');
-              uiCreation.create(e, scope.config.containerClass, latestTrack);
+              uiCreation.create(element[0], scope.config.containerClass, latestTrack);
 
+            }, function(reason) {
+              //Last.fm failure
             });
 
-          }, function(reason) {
-            //Last.fm failure
-          });
-
-        }
-        else{
-          var latestTrack = {
-            title: scope.config.title,
-            artist: scope.config.artist,
-            largeImgUrl: scope.config.largeImgUrl,
-            xLargeImgUrl: scope.config.xLargeImgUrl,
           }
-          //TODO: Call uiCreation.create()
-        }
+          else{
+            var latestTrack = {
+              title: scope.config.title,
+              artist: scope.config.artist,
+              largeImgUrl: scope.config.largeImgUrl,
+              xLargeImgUrl: scope.config.xLargeImgUrl,
+            }
+            angular.element(element).addClass('lastfm-nowplaying');
+            uiCreation.create(element[0], scope.config.containerClass, latestTrack);
+          }
 
+        }
       }
 
     };
