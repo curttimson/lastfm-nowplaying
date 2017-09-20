@@ -15,11 +15,24 @@ body{
 }
 
 form{
+
+  p{
+    width:75%;
+    
+    &.split{
+      clear: both;
+      input{
+        width:45%;
+        display: inline-block;
+      }
+    }
+  }
+
   input,
   button{
-    width:75%;
+    width:100%;
     padding:8px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     border-radius: 6px;
   }
   input{

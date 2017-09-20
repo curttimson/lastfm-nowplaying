@@ -7,7 +7,7 @@ var requireDir = require('require-dir');
 
 requireDir('./gulp-tasks');
 
-gulp.task('dev', ['sass-watch', 'js-watch']);
+gulp.task('dev', ['sass-watch', 'js-watch', 'example-build-files']);
 
 //Sass
 

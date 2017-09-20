@@ -9,21 +9,35 @@ angular.module('lastfm-nowplaying', [])
 
       var load = function(){
 
-        lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
+        var latestTrack;
 
-          var latestTrack = lastFmParser.getLatestTrack(data);
+        if (scope.config){
 
-          angular.forEach(element, function(e,i){
+          if (scope.config.apiKey){
 
+            lastFmAPI.getLatestScrobbles(scope.config).then(function(data){
+
+              latestTrack = lastFmParser.getLatestTrack(data);
+              angular.element(element).addClass('lastfm-nowplaying');
+              uiCreation.create(element[0], scope.config.containerClass, latestTrack);
+
+            }, function(reason) {
+              //Last.fm failure
+            });
+
+          }
+          else{
+            var latestTrack = {
+              title: scope.config.title,
+              artist: scope.config.artist,
+              largeImgUrl: scope.config.imgUrl,
+              xLargeImgUrl: scope.config.backgroundImgUrl,
+            }
             angular.element(element).addClass('lastfm-nowplaying');
-            uiCreation.create(e, scope, latestTrack);
+            uiCreation.create(element[0], scope.config.containerClass, latestTrack);
+          }
 
-          });
-
-        }, function(reason) {
-          //Last.fm failure
-        });
-
+        }
       }
 
     };
@@ -37,14 +51,14 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('uiCreation', ['$q', 'canvasUI', function($q, canvasUI){
 
-    var create = function(e, scope, latestTrack){
-      createCanvas(e, scope, latestTrack.xLargeImgUrl).then(function(data){
+    var create = function(e, containerClass, latestTrack){
+      createCanvas(e, latestTrack.xLargeImgUrl).then(function(data){
 
         angular.element(e).find('div').remove();
 
         var container = document.createElement('div');
-        if (scope.config.containerClass){
-          angular.element(container).addClass(scope.config.containerClass);
+        if (containerClass){
+          angular.element(container).addClass(containerClass);
         }
 
         createArtwork(container, latestTrack.largeImgUrl);
@@ -54,7 +68,7 @@ angular.module('lastfm-nowplaying', [])
       });
     }
 
-    var createCanvas = function(e, scope, imgUrl){
+    var createCanvas = function(e, imgUrl){
 
       e.innerHTML = '';
 
