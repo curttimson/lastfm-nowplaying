@@ -1,0 +1,4 @@
+describe('lastfm-nowplaying', function () {
+
+
+});
