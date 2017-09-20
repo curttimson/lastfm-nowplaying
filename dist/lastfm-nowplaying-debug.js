@@ -18,7 +18,7 @@ angular.module('lastfm-nowplaying', [])
             angular.forEach(element, function(e,i){
 
               angular.element(element).addClass('lastfm-nowplaying');
-              uiCreation.create(e, scope, latestTrack);
+              uiCreation.create(e, scope.config.containerClass, latestTrack);
 
             });
 
@@ -50,14 +50,14 @@ angular.module('lastfm-nowplaying', [])
   }])
   .factory('uiCreation', ['$q', 'canvasUI', function($q, canvasUI){
 
-    var create = function(e, scope, latestTrack){
+    var create = function(e, containerClass, latestTrack){
       createCanvas(e, latestTrack.xLargeImgUrl).then(function(data){
 
         angular.element(e).find('div').remove();
 
         var container = document.createElement('div');
-        if (scope.config.containerClass){
-          angular.element(container).addClass(scope.config.containerClass);
+        if (containerClass){
+          angular.element(container).addClass(containerClass);
         }
 
         createArtwork(container, latestTrack.largeImgUrl);
