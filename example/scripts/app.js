@@ -8,8 +8,8 @@ angular.module('app', ['lastfm-nowplaying'])
         user: $scope.username,
         title: $scope.title,
         artist: $scope.artist,
-        largeImgUrl: $scope.largeimgurl,
-        xLargeImgUrl: $scope.xlargeimgurl,
+        imgUrl: $scope.largeimgurl,
+        backgroundImgUrl: $scope.xlargeimgurl,
         containerClass: 'content'
       };
 
