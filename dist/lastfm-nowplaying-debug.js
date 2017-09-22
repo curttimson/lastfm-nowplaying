@@ -49,7 +49,7 @@ angular.module('lastfm-nowplaying', [])
       link: link
     };
   }])
-  .factory('uiCreation', ['$q', 'canvasUI', function($q, canvasUI){
+  .factory('uiCreation', ['$q', '$interval', 'canvasUI', function($q, $interval, canvasUI){
 
     var create = function(e, containerClass, latestTrack){
       createCanvas(e, latestTrack.xLargeImgUrl).then(function(data){
@@ -79,7 +79,7 @@ angular.module('lastfm-nowplaying', [])
 
       canvasUI.applyUI(e, canvas, imgUrl, function(){
 
-        setTimeout(function(){
+        $interval(function(){
 
           var canvasColor = canvasUI.getAverageCanvasColor(canvas);
 
