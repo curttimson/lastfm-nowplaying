@@ -12,7 +12,6 @@ describe('directive: lastfm-nowplaying', function () {
 
   var compiledElement = function(element) {
     element = compile(element)(scope);
-
     scope.$digest();
     return element;
   }
