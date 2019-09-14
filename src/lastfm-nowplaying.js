@@ -172,7 +172,6 @@ angular.module('lastfm-nowplaying', [])
 
   }])
 
-    //Probably checks the api-key and username and calls for the info
     .factory('lastFmAPI', ['$q', '$http', function ($q, $http) {
 
         var getLatestScrobbles = function (config) {
@@ -220,8 +219,6 @@ angular.module('lastfm-nowplaying', [])
             getLatestTrack: getLatestTrack
         }
   }])
-
-    //Canvas
 
     .factory('canvasUI', ['imageFx', function (imageFx) {
 
